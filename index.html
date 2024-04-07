@@ -9,7 +9,7 @@
 
 <body>
     <script> var nome = prompt("Qual o seu nome?")
-        quantosQuartos();
+        comoSoletra();
         alert("Bem vindo ao Hotel Pixel Palace")
         var hotel = "Pixel Palace"
 
@@ -94,6 +94,34 @@
             }
         }
 
+        function comoSoletra() {
+            var hospede = "";
+            var valorFinal = 0;
+            var meia = 0;
+            var gratuita = 0;
+            var valor = parseFloat(prompt("Qual o valor da díaria?"))
+            while (hospede != "pare") {
+                hospede = prompt("Qual o nome do Hóspede? Digite 'pare' para parar")
+                if (hospede != "pare") {
+                    var idade = parseInt(prompt("Qual a idade do Hóspede?"))
+                    if (idade <= 0) {
+                        alert("Idade invalida")
+                    }
+                    else if (idade <= 6) {
+                        gratuita ++;
+                        alert(hospede + " possui gratuidade")
+                    } else if (idade >= 60) {
+                        meia ++;
+                        valorFinal += valor / 2
+                        alert(hospede + " paga meia")
+                    } else {
+                        valorFinal += valor
+                        alert(hospede + " paga integralmente")
+                    }
+                }
+            }
+            alert(gratuita+ " são gratuitas " + meia +" pagam metade, " + " O valor total é " + valorFinal)
+        } 
     </script>
 </body>
 
