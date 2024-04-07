@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Palace</title>
+</head>
+
+<body>
+    <script> var nome = prompt("Qual o seu nome?")
+        quantosQuartos();
+        alert("Bem vindo ao Hotel Pixel Palace")
+        var hotel = "Pixel Palace"
+
+        senha();
+        function senha() {
+            var senha = parseInt(prompt("Qual a senha?"))
+
+            if (senha == 2678) {
+                alert("Bem vindo ao Hotel " + hotel + ", " + nome + " É um imenso prazer ter você por aqui!")
+                inicio()
+            } else {
+                alert("Senha inválida")
+                senha()
+            }
+        }
+
+        function inicio() {
+            var escolha = prompt("Escolha o 1) Quantos quartos são?, 2) Como soletra?, 3) Com S ou com Z ?, 4) Que horas você pode?, 5) Álcool ou gasolina?, 6) Ar puro, finalmente., 7) Sair")
+
+            switch (escolha) {
+                case "1":
+                    quantosQuartos();
+                    break;
+                case 2:
+
+                    break
+
+                case 3:
+                    break
+
+                case 4:
+                    break
+
+                case 5:
+
+                    break
+                case 6:
+
+                    break
+                case 7:
+                    alert("Muito obrigado e até logo," + nome)
+                    break
+                default:
+
+                    break;
+            }
+        }
+
+        function quantosQuartos() {
+            var quartos = [];
+
+            while (quartos.length < 20) {
+                var diariaValor = parseFloat(prompt("Qual o valor da díaria?"))
+                var diaria = parseInt(prompt("Quantas diárias serão necessárias?"))
+                var confirmar;
+                if (diariaValor <= 0 || diaria > 30 || diaria <= 0) {
+                    alert("Valor Inválido")
+                    quantosQuartos();
+                } else {
+                    var valorFinal = diaria * diariaValor;
+                    var nomeHospede = prompt("Qual o nome do hóspede?")
+                    do {
+                        var quartoReserva = prompt("Qual o quarto para reserva? (1 - 20)? ")
+                        if (quartoReserva > 20 || quartoReserva <= 0) {
+                            alert("Digite um quarto válido")
+                        } else {
+                            if (quartos.includes(quartoReserva)) {
+                                alert("Quarto Preenchido, tente outro!")
+                            } else {
+                                quartos.push(quartoReserva)
+                                confirmar = confirm(nome + " ,você confirma a hospedagem para  " + nomeHospede + " por " + diaria + " dias para o quarto " + quartoReserva + " por R$" + valorFinal + "?")
+                                if (confirmar) {
+                                    alert("Reserva concluida!")
+                                    break
+                                } else {
+                                    inicio();
+                                }
+                            }
+                        }
+                    } while (quartos.includes(quartoReserva));
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
