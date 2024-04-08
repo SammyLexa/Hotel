@@ -8,8 +8,9 @@
 </head>
 
 <body>
-    <script> var nome = prompt("Qual o seu nome?")
-        comoSoletra();
+    <script>
+        var nome = prompt("Qual o seu nome?")
+        queHoras();
         alert("Bem vindo ao Hotel Pixel Palace")
         var hotel = "Pixel Palace"
 
@@ -34,15 +35,14 @@
                     quantosQuartos();
                     break;
                 case 2:
-
+                    comoSoletra()
                     break
-
                 case 3:
+                    comZS();
                     break
-
                 case 4:
-                    break
 
+                    break
                 case 5:
 
                     break
@@ -108,10 +108,10 @@
                         alert("Idade invalida")
                     }
                     else if (idade <= 6) {
-                        gratuita ++;
+                        gratuita++;
                         alert(hospede + " possui gratuidade")
                     } else if (idade >= 60) {
-                        meia ++;
+                        meia++;
                         valorFinal += valor / 2
                         alert(hospede + " paga meia")
                     } else {
@@ -120,8 +120,140 @@
                     }
                 }
             }
-            alert(gratuita+ " são gratuitas " + meia +" pagam metade, " + " O valor total é " + valorFinal)
-        } 
+            alert(gratuita + " são gratuitas " + meia + " pagam metade, " + " O valor total é " + valorFinal)
+        }
+
+        function comZS() {
+            var hospedes = [];
+            do {
+                var escolha = parseInt(prompt("1- cadastrar; 2- pesquisar; 3-listar; 4- sair. "));
+
+                switch (escolha) {
+                    case 1:
+                        for (var i = hospedes.length; i < 15; i++) {
+                            var nomeHospede = prompt("Qual o nome do hóspede?")
+                            hospedes.push(nomeHospede);
+                            var confirmar = confirm("Deseja adicionar mais algum hospede ou sair?")
+                            if (!confirmar) {
+                                break
+                            } else if (i == 14) {
+                                alert("Máximo de cadastros atingido")
+                            }
+                        }
+                        break;
+                    case 2:
+                        var nomeHospede = prompt("Qual o nome do Hospede?")
+                        if (hospedes.includes(nomeHospede)) {
+                            alert("Hospede " + nomeHospede + " foi encontrado!")
+                        } else {
+                            alert("Hospede " + nomeHospede + " não foi encontrado!")
+                        }
+                        break;
+                    case 3:
+                        alert(hospedes)
+                        break;
+                    case 4:
+                        alert("Muito obrigado e até logo, " + nome)
+                        break;
+                    default:
+                        alert("Escolha um número válido, (1 ,2 ,3 ,4 )")
+                        break;
+                }
+            } while (escolha != 4);
+
+        }
+
+        function queHoras() {
+            var espaco = "";
+            var cadeiras = 0;
+            while (true) {
+                var quantidadePessoas = prompt("Quantas pessoas no evento?");
+                if (quantidadePessoas <= 150 && quantidadePessoas > 0) {
+                    alert("Use o auditório Laranja");
+                    espaco = "Laranja";
+                    break;
+                } else if (quantidadePessoas <= 220 && quantidadePessoas > 0) {
+                    cadeiras = quantidadePessoas - 150;
+                    alert("Use o auditório Laranja com o adicional de " + cadeiras + " cadeiras");
+                    espaco = "Laranja";
+                    break;
+                } else if (quantidadePessoas > 220 && quantidadePessoas <= 350) {
+                    alert("Use o auditório Colorado");
+                    espaco = "Colorado";
+                    break;
+                } else {
+                    alert("Quantidade de pessoas inválida!")
+                }
+            }
+            var validacao = true;
+            while (validacao) {
+                var diaSemana = prompt("Qual o dia?");
+                switch (diaSemana) {
+                    case "segunda":
+
+                    case "terca":
+
+                    case "quarta":
+
+                    case "quinta":
+
+                    case "sexta":
+                        var horaEvento = parseInt(prompt("Qual a hora do seu evento?"));
+                        if (horaEvento < 7 || horaEvento > 23) {
+                            alert("Horario de funcionamento inválido!")
+                        } else {
+                            var nomeEmpresa = prompt("Qual o nome da empresa?")
+                            alert("Auditório " + espaco + " reservado para " + nomeEmpresa + " na " + diaSemana + " às " + horaEvento + "hs")
+                            validacao = false;
+                        }
+                        break;
+                    case "sabado":
+                    case "domingo":
+                        var horaEvento = parseInt(prompt("Qual a hora do seu evento?"));
+                        if (horaEvento < 7 || horaEvento > 15) {
+                            alert("Horario de funcionamento inválido!")
+                        } else {
+                            var nomeEmpresa = prompt("Qual o nome da empresa?")
+                            alert("Auditório " + espaco + " reservado para " + nomeEmpresa + " na " + diaSemana + " às " + horaEvento + "hs")
+                            validacao = false;
+                        }
+                        break
+                    default:
+                        alert("Dia da semana inválido, use minusculas e sem pontuação!")
+                        break;
+                }
+            }
+            var duracao = parseInt(prompt("Quanto tempo do evento em horas?"));
+            var garcon = Math.ceil(quantidadePessoas / 12);
+            var horaFinal = horaEvento + duracao;
+            garcon += Math.ceil(duracao / 2)
+            var valorGarcon = garcon * 10.50 * duracao;
+            alert("São necessários " + garcon + " garçons");
+            alert("O custo será R$" + valorGarcon);
+            alert("Agora vamos calcular o custo do buffet do hotel para o evento")
+            var cafe = Math.ceil(0.2 * quantidadePessoas);
+            var agua = Math.ceil(0.5 * quantidadePessoas);
+            var salgado = Math.ceil(7 * quantidadePessoas / 100) * 100;
+            var valorAgua = agua * 0.4;
+            var valorCafe = cafe * 0.8;
+            var valorSalgado = salgado / 100 * 34;
+            var valorBuffet = valorAgua + valorCafe + valorSalgado;
+            var valorTotal = valorBuffet + valorGarcon;
+            alert("Valor total do buffet " + valorBuffet + " quantidade da água " + agua + " quantidade de café " + cafe + " quantidade de salgado " + salgado);
+
+            alert("Evento no Auditório" + espaco + "\n" + 
+"Nome da Empresa:"+ nomeEmpresa + "\n" +
+                "Data:" + diaSemana + " " + horaEvento + " às " + horaFinal+ "\n" +
+"Duração do evento:" + duracao + "Hs" + "\n" +
+"Quantidade de garçons:" + garcon + "\n" +
+"Quantidade de Convidados:" + quantidadePessoas + "\n" +
+
+"Custo do garçons: " + "R$" + valorGarcon + "\n"+
+"Custo do Buffet:" + "R$" + valorBuffet + "\n" +
+
+"Valor total do Evento:" + " R$"+ valorTotal)
+        }
+
     </script>
 </body>
 
