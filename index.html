@@ -10,7 +10,6 @@
 <body>
     <script>
         var nome = prompt("Qual o seu nome?")
-        queHoras();
         alert("Bem vindo ao Hotel Pixel Palace")
         var hotel = "Pixel Palace"
 
@@ -32,28 +31,28 @@
 
             switch (escolha) {
                 case "1":
-                    quantosQuartos();
+                quantosQuartos();
                     break;
                 case 2:
-                    comoSoletra()
+                comoSoletra()
                     break
                 case 3:
-                    comZS();
+                comZS();
                     break
                 case 4:
-
+                queHoras()
                     break
                 case 5:
-
+                abastecer()
                     break
                 case 6:
-
+                manutencao_ar()
                     break
                 case 7:
-                    alert("Muito obrigado e até logo," + nome)
+                sair()
                     break
                 default:
-
+                erro()
                     break;
             }
         }
@@ -241,17 +240,114 @@
             var valorTotal = valorBuffet + valorGarcon;
             alert("Valor total do buffet " + valorBuffet + " quantidade da água " + agua + " quantidade de café " + cafe + " quantidade de salgado " + salgado);
 
-            alert("Evento no Auditório" + espaco + "\n" + 
-"Nome da Empresa:"+ nomeEmpresa + "\n" +
-                "Data:" + diaSemana + " " + horaEvento + " às " + horaFinal+ "\n" +
-"Duração do evento:" + duracao + "Hs" + "\n" +
-"Quantidade de garçons:" + garcon + "\n" +
-"Quantidade de Convidados:" + quantidadePessoas + "\n" +
+            alert("Evento no Auditório" + espaco + "\n" +
+                "Nome da Empresa:" + nomeEmpresa + "\n" +
+                "Data:" + diaSemana + " " + horaEvento + " às " + horaFinal + "\n" +
+                "Duração do evento:" + duracao + "Hs" + "\n" +
+                "Quantidade de garçons:" + garcon + "\n" +
+                "Quantidade de Convidados:" + quantidadePessoas + "\n" +
 
-"Custo do garçons: " + "R$" + valorGarcon + "\n"+
-"Custo do Buffet:" + "R$" + valorBuffet + "\n" +
+                "Custo do garçons: " + "R$" + valorGarcon + "\n" +
+                "Custo do Buffet:" + "R$" + valorBuffet + "\n" +
 
-"Valor total do Evento:" + " R$"+ valorTotal)
+                "Valor total do Evento:" + " R$" + valorTotal)
+        }
+
+        function abastecer() {
+
+            var alcWayne = parseFloat(prompt('Qual o valor do álcool no posto Wayne Oil?'));
+            var gasWayne = parseFloat(prompt('Qual o valor da gasolina no posto Wayne Oil?'));
+            var alcStark = parseFloat(prompt('Qual o valor do álcool no posto Stark Petrol?'));
+            var gasStark = parseFloat(prompt('Qual o valor da gasolina no posto Stark Petrol?'));
+
+            if (alcWayne < (gasWayne * 0.70) && alcWayne < (gasStark * 0.70) && alcWayne < alcStark) {
+                alert(usuario + ', é mais barato abastecer com álcool no posto Wayne Oil.')
+            }
+            if (alcStark < (gasWayne * 0.70) && alcStark < (gasStark * 0.70) && alcWayne > alcStark) {
+                alert(usuario + ', é mais barato abastecer com álcool no posto Stark Petrol.')
+            }
+            if (alcWayne > (gasWayne * 0.70) && alcWayne > (gasStark * 0.70) && gasWayne < gasStark) {
+                alert(usuario + ', é mais barato abastecer com gasolina no posto Wayne Oil.')
+            }
+            if (alcStark > (gasWayne * 0.70) && alcStark > (gasStark * 0.70) && gasWayne > gasStark) {
+                alert(usuario + ', é mais barato abastecer com gasolina no posto Stark Petrol.')
+            }
+
+            inicio()
+
+        }
+
+
+
+        function manutencao_ar() {
+
+            var loop = true
+
+            for (var i = 0; loop == true; i++) {
+
+                empresas[i] = prompt('Qual o nome da empresa?')
+
+                var valorApa = parseFloat(prompt('Qual o valor por aparelho?'));
+
+                var quantApa = parseInt(prompt('Qual a quantidade de aparelhos?'));
+
+                var quantDesc = parseInt(prompt('Qual a porcentagem de desconto?'));
+                quantDesc = quantDesc * 0.01
+
+                var minQuantApa = parseInt(prompt('Qual o número mínimo de aparelhos para conseguir o desconto?'));
+
+                var valorTotal = (valorApa * quantApa)
+                var valorTotalDesc = (valorApa * quantApa) - (quantDesc * (valorApa * quantApa))
+
+                if (quantApa >= minQuantApa) {
+                    alert(usuario + ', o serviço da empresa custará R$' + valorTotalDesc)
+                    valorPorEmpresa[i] = valorTotalDesc
+                } else {
+                    alert(usuario + ', o serviço da empresa custará R$' + valorTotal)
+                    valorPorEmpresa[i] = valorTotal
+                }
+
+                var continuar = prompt("Continuar? S ou N: ")
+
+                if (continuar == "S" || continuar == "s") {
+                    loop = true
+                } else if (continuar == "N" || continuar == "n") {
+                    loop = false
+                } else {
+                    alert("Comando Errado")
+                    loop = false
+                }
+            }
+
+            var pegarNum = empresas[0]
+
+            for (var a = 0; a < empresas.length; a++) {
+                if (empresas[a] < pegarNum) {
+                    pegarNum = empresas[a]
+                }
+            }
+
+            var posicao = empresas.indexOf(pegarNum)
+
+            alert('O orçamento de menor valor é da ' + empresas[posicao] + ' por R$' + valorPorEmpresa[posicao])
+
+
+        }
+
+
+        function erro() {
+            alert('Por favor, informe um número entre 1 e 7');
+            inicio();
+        }
+
+        function sair() {
+            var confirma = confirm('Você deseja sair?');
+            if (confirma) {
+                alert('Muito obrigado e até logo, ' + usuario)
+                window.close();
+            } else {
+                inicio();
+            }
         }
 
     </script>
